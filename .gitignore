@@ -1,0 +1,27 @@
+# Secrets
+config/db.php
+config/storage.php
+config/api.php
+*.env
+*.key
+*.pem
+
+# PHP dependencies / runtime
+vendor/
+composer.lock
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Local artifacts
+work/
+*.zip
+*.tar.gz
+*.log
+
+# Do not commit downloaded design prototype
+band-design/
+band-rounded-theme.css
