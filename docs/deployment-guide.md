@@ -56,7 +56,8 @@ echo 'OK from ' . gethostname() . PHP_EOL;
 ## 4. DB 연결 확인
 
 ```bash
-nc -vz <cloud-db-private-domain> 3306
+export DB_HOST="<cloud-db-private-domain>"
+nc -vz "$DB_HOST" 3306
 php -r 'require "/var/www/html/config/db.php"; echo "PDO OK\n";'
 ```
 
@@ -75,8 +76,9 @@ php -l /var/www/html/mypage.php
 ## 6. Load Balancer 확인
 
 ```bash
-curl -I http://<public-lb-domain>/
-curl http://<public-lb-domain>/health.php
+export LB_URL="http://<public-lb-domain>"
+curl -I "$LB_URL/"
+curl "$LB_URL/health.php"
 ```
 
 여러 번 요청했을 때 `web-01`, `web-02`, Auto Scaling 서버의 hostname이 번갈아 나오면 Load Balancing이 동작하는 것입니다.
@@ -85,7 +87,7 @@ curl http://<public-lb-domain>/health.php
 
 ```bash
 sudo apt-get install -y apache2-utils
-ab -n 1000 -c 50 http://<public-lb-domain>/
+ab -n 1000 -c 50 "$LB_URL/"
 ```
 
 확인 항목:
