@@ -30,4 +30,8 @@ echo "[5] DB connect"
 php -r 'require "/var/www/html/config/db.php"; echo "PDO OK\n";'
 
 echo "[6] Cloud DB port"
-nc -vz <cloud-db-private-domain> 3306
+if [ -n "${DB_HOST:-}" ]; then
+  nc -vz "$DB_HOST" 3306
+else
+  echo "skip: set DB_HOST to check the private Cloud DB port"
+fi
